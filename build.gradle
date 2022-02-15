@@ -1,0 +1,39 @@
+plugins {
+    id 'groovy'
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'cn.holelin.plugin'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven {
+        url = 'https://maven.aliyun.com/repository/public'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+publishing {
+    publications {
+        mavenPub(MavenPublication) {
+            // 这一行表示将 jar 包包含在要发布的组件中
+            from components.java
+            // 描述性信息
+            groupId = 'cn.holelin.plugin'
+            artifactId = 'test'
+            version = '1.0-SNAPSHOT'
+        }
+    }
+    repositories {
+        maven {
+            // 本地 repo 地址，这里写上你们电脑上自己的地址
+            url = '/Users/holelin/.m2/repository'
+        }
+    }
+}
